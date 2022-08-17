@@ -1,0 +1,104 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - bot_challenge
+  - room_suggestion
+  - room
+  - get_started
+  - room_price
+  - room_amenities
+  - room_listing
+  - room_location
+actions:
+  - action_get_suggestion
+  - action_get_room
+  - action_get_room_price
+  - action_get_room_amenities
+  - action_get_room_listing
+  - action_get_room_location
+entities:
+  - checkin_date
+  - num_guest
+  - checkout_date
+  - room_id
+
+slots:
+  num_guest:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: suggestion_form
+        requested_slot: num_guest
+  checkout_date:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: suggestion_form
+        requested_slot: checkout_date
+  checkin_date:
+    influence_conversation: true
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: suggestion_form
+        requested_slot: checkin_date
+
+  room_id:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: room_id
+  
+
+
+forms:
+  suggestion_form:
+    required_slots:
+        - checkin_date
+        - checkout_date
+        - num_guest
+        
+ 
+
+responses:
+  utter_ask_checkin_date:
+  - text: "When are you checking in? (yyyy-mm-dd)"
+  utter_ask_checkout_date:
+  - text: "When are you checking out? (yyyy-mm-dd)"
+  utter_ask_num_guest:
+  - text: "How many guest do you have?"
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_goodbye:
+  - text: "Thank you for chatting with me today. Have a nice day. Goodbye."
+  - text: "Thanks for stopping by, I hope to hear from you again!"
+
+  utter_welcome:
+  - text: "Hello! I am AIRKIM, an airbnb search assistant! How can I help?"
+    buttons:
+    - title: "Get room recomendation"
+      payload: "/room_suggestion"
+
+  utter_submit:
+  - text: "All done!"
+
+  utter_slots_values:
+  - text: "I am going to search airbnb using the following parameters:\n
+            - check in date: {checkin_date}\n
+            - check out date: {checkout_date}\n
+            - number of guest: {num_guest}\n"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

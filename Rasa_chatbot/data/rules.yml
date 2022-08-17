@@ -1,0 +1,64 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: show room Id
+  steps:
+  - intent: room
+  - action: action_get_room
+
+- rule: show room Price
+  steps:
+  - intent: room_price
+  - action: action_get_room_price
+
+- rule: show room Amenities
+  steps:
+  - intent: room_amenities
+  - action: action_get_room_amenities
+  
+- rule: show room Listing
+  steps:
+  - intent: room_listing
+  - action: action_get_room_listing
+
+- rule: show room Location
+  steps:
+  - intent: room_location
+  - action: action_get_room_location
+
+- rule: return listing
+  steps:
+  - intent: return_listing
+  - action: action_get_suggestion
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Activate form
+  steps:
+  - intent: room_suggestion
+  - action: suggestion_form
+  - active_loop: suggestion_form
+
+- rule: Submit form
+  condition:
+  # Condition that form is active.
+  - active_loop: suggestion_form
+  steps:
+  # Form is deactivated
+  - action: suggestion_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  - action: utter_submit
+  - action: utter_slots_values
+  - action: action_get_suggestion

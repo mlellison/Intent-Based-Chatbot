@@ -1,0 +1,77 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: room_suggestion
+  examples: |
+    - Help me get a room?
+    - Give me suggestion?
+    - Room suggestion?
+
+- intent: room
+  examples: |
+    - [1](room_id)
+    - [20](room_id)
+
+- intent: room_price
+  examples: |
+    - [1](room_id)
+    - [20](room_id)
+
+- intent: room_amenities
+  examples: |
+    - [1](room_id)
+    - [20](room_id)
+    
+- intent: room_listing
+  examples: |
+    - [1](room_id)
+    - [20](room_id)
+
+- intent: get_started
+  examples: |
+    - I need assistance
+    - Help Me
+    - Started
+    - get started
+    - i want to book an airbnb
+    - get me airbnb
+
+- intent: return_listing
+  examples: |
+    - return
